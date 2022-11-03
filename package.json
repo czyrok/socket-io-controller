@@ -5,6 +5,7 @@
   "license": "MIT",
   "description": "",
   "main": "dist/index.js",
+  "types": "src/indec.d.ts",
   "scripts": {
     "build": "tsc"
   },
