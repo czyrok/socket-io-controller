@@ -4,7 +4,7 @@
   "author": "czyrok",
   "license": "MIT",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc"
   },
@@ -14,6 +14,10 @@
     "typescript",
     "socket.io"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/czyrok/lib-socket-io-controller.git"
+  },
   "dependencies": {
     "class-transformer": "^0.5.1",
     "glob": "^8.0.3",
