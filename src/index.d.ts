@@ -1,3 +1,5 @@
+declare module 'socket-io-controller'
+
 export * from './decorator/socket.decorator'
 
 export * from './helper/using.helper'
