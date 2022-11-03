@@ -4,10 +4,14 @@
   "author": "czyrok",
   "license": "MIT",
   "description": "",
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
+  ],
   "main": "dist/index.js",
   "types": "dist/indec.d.ts",
   "scripts": {
-    "build": "tsc --declaration"
+    "build": "tsc"
   },
   "private": true,
   "keywords": [
