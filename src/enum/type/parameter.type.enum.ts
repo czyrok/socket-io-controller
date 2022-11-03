@@ -1,0 +1,16 @@
+/**
+ * Controller action's parameter type
+ */
+export enum ParameterTypeEnum {
+  CUSTOM,
+  CONNECTED_SOCKET,
+  SOCKET_BODY,
+  SOCKET_QUERY_PARAM,
+  SOCKET_IO,
+  NAMESPACE_SOCKET_IO,
+  SOCKET_ID,
+  SOCKET_REQUEST,
+  SOCKET_ROOMS,
+  NAMESPACE_PARAMS,
+  NAMESPACE_PARAM
+}
