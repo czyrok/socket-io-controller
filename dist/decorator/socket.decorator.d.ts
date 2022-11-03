@@ -5,7 +5,7 @@ import { ClassTransformOptions } from 'class-transformer';
  *
  * @param namespace Namespace in which this controller's events will be registered
  */
-export declare function SocketController(namespace?: string): (object: Function) => void;
+export declare function SocketController(namespace?: string): Function;
 /**
  * Registers controller's action to be executed when socket receives message with given name
  */

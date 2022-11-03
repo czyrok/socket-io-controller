@@ -10,6 +10,6 @@ export * from './model/socket-executor.model'
 
 export * from './interface/middleware.interface'
 
-export module SocketIoController {
-
-}
+export declare namespace SocketIoController {
+    export function SocketController(namespace?: string): Function
+} 

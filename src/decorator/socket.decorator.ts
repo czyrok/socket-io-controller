@@ -19,7 +19,7 @@ import { StorageArgUtil } from '../util/arg/storage.arg.util'
  *
  * @param namespace Namespace in which this controller's events will be registered
  */
-export function SocketController(namespace?: string) {
+export function SocketController(namespace?: string): Function {
   return function (object: Function) {
     const metadata: ControllerArgInterface = {
       namespace: namespace,

@@ -5,5 +5,6 @@ export * from './error/server.error';
 export * from './error/parse-json.socket.error';
 export * from './model/socket-executor.model';
 export * from './interface/middleware.interface';
-export declare module SocketIoController {
+export declare namespace SocketIoController {
+    function SocketController(namespace?: string): Function;
 }
