@@ -1,6 +1,6 @@
 import { ServerError } from './server.error'
 
-import codeErrorConfig from '../config/error-code.json'
+import codeErrorConfig from '../config/error-code.config.json'
 
 /**
  * Caused when user parameter is given, but is invalid and cannot be parsed

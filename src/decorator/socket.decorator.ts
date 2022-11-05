@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { ClassTransformOptions } from 'class-transformer'
 
-import appointmentConfig from '../config/appointment.json'
+import appointmentConfig from '../config/appointment.config.json'
 
 import { ControllerArgInterface } from '../interface/arg/controller.arg.interface'
 import { ActionArgInterface } from '../interface/arg/action.arg.interface'
