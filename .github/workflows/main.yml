@@ -1,0 +1,35 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+      
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_READ_TOKEN }}
+
+jobs:
+  publish:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Getting code
+        uses: actions/checkout@v3
+        
+      - name: Installing NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 12
+          
+      - name: Installing dependences and compiling the package
+        run: |
+          npm install
+          npm run build_to_publish
+          
+      - name: Publishing
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_PUBLISH_TOKEN }}
