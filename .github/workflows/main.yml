@@ -22,7 +22,7 @@ jobs:
       - name: Installing dependences and compiling the package
         run: |
           npm install
-          npm run build_to_publish
+          npm run build
           
       - name: Publishing
         uses: JS-DevTools/npm-publish@v1
