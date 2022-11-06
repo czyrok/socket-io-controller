@@ -9,7 +9,7 @@ on:
       - closed
       
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_READ_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.READ_TOKEN }}
 
 jobs:
   publish:
