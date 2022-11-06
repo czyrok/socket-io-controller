@@ -10,7 +10,6 @@
     "clean": "rm -rf ./dist && mkdir ./dist/",
     "build": "tsc"
   },
-  "private": true,
   "keywords": [
     "websocket",
     "typescript",
