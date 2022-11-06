@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/czyrok/lib-socket-io-controller.git"
+    "url": "https://github.com/czyrok/socket-io-controller.git"
   },
   "dependencies": {
     "class-transformer": "^0.5.1",
