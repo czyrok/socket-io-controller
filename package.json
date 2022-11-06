@@ -8,7 +8,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rm -rf ./dist && mkdir ./dist/",
-    "clean_github_files": "find ./ -name \".*\" -exec rm -rf {} \\;",
+    "clean_github_files": "find . -type d -name \"node_modules\" -prune -o -name \".git*\" -exec rm -rf {} \\;",
     "build": "tsc",
     "build_to_publish": "tsc && rm -rf ./src"
   },
