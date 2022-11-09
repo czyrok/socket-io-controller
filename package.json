@@ -1,6 +1,6 @@
 {
-  "name": "socket-io-controller",
-  "version": "1.0.1",
+  "name": "socket.io-controller",
+  "version": "1.0.2",
   "author": "czyrok",
   "license": "MIT",
   "description": "",
@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/czyrok/socket-io-controller.git"
+    "url": "https://github.com/czyrok/socket.io-controller.git"
   },
   "dependencies": {
     "class-transformer": "^0.5.1",
