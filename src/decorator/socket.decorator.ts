@@ -339,7 +339,7 @@ export function EmitOnFail(messageName?: string, options?: { classTransformOptio
       target: object.constructor,
       method: methodName,
       type: ResultTypeEnum.EMIT_ON_FAIL,
-      value: messageName || `${methodName}${appointmentConfig.EVENT.MESSAGE_NAME}`,
+      value: messageName || `${methodName}${appointmentConfig.EVENT.ERROR_MESSAGE_NAME}`,
       classTransformOptions: options && options.classTransformOptions ? options.classTransformOptions : undefined,
     }
 

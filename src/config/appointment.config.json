@@ -1,5 +1,5 @@
 {
     "EVENT": {
-        "MESSAGE_NAME": "-failed"
+        "ERROR_MESSAGE_NAME": "-failed"
     }
 }
