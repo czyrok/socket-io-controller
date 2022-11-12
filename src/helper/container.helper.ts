@@ -1,3 +1,5 @@
+import { GetInstanceSocketError } from '../error/get-instance.socket.error'
+
 import { UserContainerInterface } from '../interface/user-container.interface'
 
 /**
@@ -29,8 +31,10 @@ export class ContainerHelper {
     */
     private static defaultContainer: { get<T>(someClass: { new(...args: any[]): T } | Function): T } = new (class {
         private instances: { type: Function, object: any }[] = []
+
         get<T>(someClass: { new(...args: any[]): T }): T {
             let instance = this.instances.find(instance => instance.type === someClass)
+
             if (!instance) {
                 instance = { type: someClass, object: new someClass() }
                 this.instances.push(instance)
@@ -56,13 +60,15 @@ export class ContainerHelper {
         if (this.userContainer) {
             try {
                 const instance = this.userContainer.get(someClass)
+
                 if (instance) return instance
 
                 if (!this.userContainerOptions || !this.userContainerOptions.fallback) return instance
             } catch (error) {
-                if (!this.userContainerOptions || !this.userContainerOptions.fallbackOnErrors) throw error
+                if (!this.userContainerOptions || !this.userContainerOptions.fallbackOnErrors) throw new GetInstanceSocketError()
             }
         }
+
         return this.defaultContainer.get<T>(someClass)
     }
 }
