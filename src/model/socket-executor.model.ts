@@ -95,8 +95,12 @@ export class SocketExecutorModel {
         })
       }
 
+      for (let controller of controllers) {
+        if (controller.init !== undefined) controller.init(namespaceIoServer)
+      }
+
       namespaceIoServer.on('connection', (socket: Socket) => {
-        this.handleConnection(controllers, socket, namespaceIoServer)
+        this.handleConnection(controllers, socket)
       })
     })
   }
@@ -148,7 +152,7 @@ export class SocketExecutorModel {
 
     for (let line of map.entries()) {
       let key: string = line[0]
-  
+
       if (currentKey.localeCompare(key) < 0) {
         break
       }
@@ -194,10 +198,8 @@ export class SocketExecutorModel {
   /**
    * Handle connection by controller and by action
    */
-  private handleConnection(controllers: Array<ControllerArgModel>, socket: Socket, io?: Namespace): void {
+  private handleConnection(controllers: Array<ControllerArgModel>, socket: Socket): void {
     controllers.forEach(controller => {
-      if (io !== undefined) controller.init(io)
-
       controller.actions.forEach(action => {
         if (action.type === ActionTypeEnum.CONNECT) {
           this.handleAction(action, { socket: socket })
