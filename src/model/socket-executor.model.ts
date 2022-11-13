@@ -299,7 +299,7 @@ export class SocketExecutorModel {
         return !!value
 
       default:
-        const isObjectFormat = format instanceof Function || formatName.toLowerCase() === 'object'
+        const isObjectFormat: boolean = format instanceof Function || formatName.toLowerCase() === 'object'
 
         if (value && isObjectFormat) value = this.parseParameterValue(value, param)
     }
