@@ -1,3 +1,5 @@
+import { Namespace } from 'socket.io'
+
 import { ContainerHelper } from '../../helper/container.helper'
 
 import { ActionArgModel } from './action.arg.model'
@@ -27,13 +29,18 @@ export class ControllerArgModel {
    */
   private _namespace!: string
 
+  /**
+   * Extra initialization function which it uses at the initialization of the controller
+   */
+  private _init!: (io: Namespace) => void
+
   // -------------------------------------------------------------------------
   // Constructor
   // -------------------------------------------------------------------------
 
   constructor(args: ControllerArgInterface) {
     this.target = args.target
-    
+
     if (args.namespace) this.namespace = args.namespace
   }
 
@@ -53,6 +60,10 @@ export class ControllerArgModel {
     this._namespace = value
   }
 
+  public set init(value: (io: Namespace) => void) {
+    this._init = value
+  }
+
   // -------------------------------------------------------------------------
   // Getters
   // -------------------------------------------------------------------------
@@ -67,6 +78,10 @@ export class ControllerArgModel {
 
   public get namespace(): string {
     return this._namespace
+  }
+
+  public get init(): (io: Namespace) => void {
+    return this._init
   }
 
   public get instance(): any {

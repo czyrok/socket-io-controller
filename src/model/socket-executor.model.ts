@@ -96,7 +96,7 @@ export class SocketExecutorModel {
       }
 
       namespaceIoServer.on('connection', (socket: Socket) => {
-        this.handleConnection(controllers, socket)
+        this.handleConnection(controllers, socket, namespaceIoServer)
       })
     })
   }
@@ -194,8 +194,10 @@ export class SocketExecutorModel {
   /**
    * Handle connection by controller and by action
    */
-  private handleConnection(controllers: Array<ControllerArgModel>, socket: Socket): void {
+  private handleConnection(controllers: Array<ControllerArgModel>, socket: Socket, io?: Namespace): void {
     controllers.forEach(controller => {
+      if (io !== undefined) controller.init(io)
+
       controller.actions.forEach(action => {
         if (action.type === ActionTypeEnum.CONNECT) {
           this.handleAction(action, { socket: socket })
@@ -299,7 +301,7 @@ export class SocketExecutorModel {
         return !!value
 
       default:
-        const isObjectFormat = format instanceof Function || formatName.toLowerCase() === 'object'
+        const isObjectFormat: boolean = format instanceof Function || formatName.toLowerCase() === 'object'
 
         if (value && isObjectFormat) value = this.parseParameterValue(value, param)
     }

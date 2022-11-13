@@ -1,6 +1,6 @@
 {
-  "name": "socket.io-controller",
-  "version": "1.0.3",
+  "name": "@czyrok/ts-socket.io-controller",
+  "version": "1.0.4",
   "author": "czyrok",
   "license": "MIT",
   "description": "",
