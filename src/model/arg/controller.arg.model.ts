@@ -42,6 +42,7 @@ export class ControllerArgModel {
     this.target = args.target
 
     if (args.namespace) this.namespace = args.namespace
+    if (args.init) this.init = args.init
   }
 
   // -------------------------------------------------------------------------

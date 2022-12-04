@@ -95,8 +95,12 @@ export class SocketExecutorModel {
         })
       }
 
+      for (let controller of controllers) {
+        if (controller.init !== undefined) controller.init(namespaceIoServer)
+      }
+
       namespaceIoServer.on('connection', (socket: Socket) => {
-        this.handleConnection(controllers, socket, namespaceIoServer)
+        this.handleConnection(controllers, socket)
       })
     })
   }
@@ -105,10 +109,14 @@ export class SocketExecutorModel {
    * Build a middleware-controller-map per namespace
    */
   private buildNamespaceMap(middlewares: Array<MiddlewareArgModel>, controllers: Array<ControllerArgModel>): Map<string, Array<MiddlewareArgModel | ControllerArgModel>> {
-    const filteredMiddlewares: Array<MiddlewareArgModel> = middlewares.filter(ctrl => !!ctrl.namespace)
-    const filteredControllers: Array<ControllerArgModel> = controllers.filter(ctrl => !!ctrl.namespace)
+    const filteredMiddlewaresWithoutNamespace: Array<MiddlewareArgModel> = middlewares.filter(ctrl => !ctrl.namespace)
+
+    for (let middleware of filteredMiddlewaresWithoutNamespace) middleware.namespace = '/'
 
     let map: Map<string, Array<MiddlewareArgModel | ControllerArgModel>> = new Map()
+
+    const filteredControllers: Array<ControllerArgModel> = controllers.filter(ctrl => !!ctrl.namespace)
+    const filteredMiddlewares: Array<MiddlewareArgModel> = middlewares.filter(ctrl => !!ctrl.namespace)
 
     filteredMiddlewares
       .sort((middleware1, middleware2) => middleware1.priority - middleware2.priority)
@@ -148,7 +156,7 @@ export class SocketExecutorModel {
 
     for (let line of map.entries()) {
       let key: string = line[0]
-  
+
       if (currentKey.localeCompare(key) < 0) {
         break
       }
@@ -159,16 +167,6 @@ export class SocketExecutorModel {
         }
       }
     }
-
-    /* map.forEach((values: Array<MiddlewareArgModel | ControllerArgModel>, key: string) => {
-      if (currentKey.localeCompare(key) < 0) return
-
-      for (let value of values) {
-        if (value instanceof MiddlewareArgModel && key.indexOf(value.instance) == 0) {
-          middlewares.push(value)
-        }
-      }
-    }) */
 
     return middlewares
   }
@@ -194,10 +192,8 @@ export class SocketExecutorModel {
   /**
    * Handle connection by controller and by action
    */
-  private handleConnection(controllers: Array<ControllerArgModel>, socket: Socket, io?: Namespace): void {
+  private handleConnection(controllers: Array<ControllerArgModel>, socket: Socket): void {
     controllers.forEach(controller => {
-      if (io !== undefined) controller.init(io)
-
       controller.actions.forEach(action => {
         if (action.type === ActionTypeEnum.CONNECT) {
           this.handleAction(action, { socket: socket })
