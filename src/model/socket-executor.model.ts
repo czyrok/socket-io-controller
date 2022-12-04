@@ -109,10 +109,14 @@ export class SocketExecutorModel {
    * Build a middleware-controller-map per namespace
    */
   private buildNamespaceMap(middlewares: Array<MiddlewareArgModel>, controllers: Array<ControllerArgModel>): Map<string, Array<MiddlewareArgModel | ControllerArgModel>> {
-    const filteredMiddlewares: Array<MiddlewareArgModel> = middlewares.filter(ctrl => !!ctrl.namespace)
-    const filteredControllers: Array<ControllerArgModel> = controllers.filter(ctrl => !!ctrl.namespace)
+    const filteredMiddlewaresWithoutNamespace: Array<MiddlewareArgModel> = middlewares.filter(ctrl => !ctrl.namespace)
+
+    for (let middleware of filteredMiddlewaresWithoutNamespace) middleware.namespace = '/'
 
     let map: Map<string, Array<MiddlewareArgModel | ControllerArgModel>> = new Map()
+
+    const filteredControllers: Array<ControllerArgModel> = controllers.filter(ctrl => !!ctrl.namespace)
+    const filteredMiddlewares: Array<MiddlewareArgModel> = middlewares.filter(ctrl => !!ctrl.namespace)
 
     filteredMiddlewares
       .sort((middleware1, middleware2) => middleware1.priority - middleware2.priority)
@@ -163,16 +167,6 @@ export class SocketExecutorModel {
         }
       }
     }
-
-    /* map.forEach((values: Array<MiddlewareArgModel | ControllerArgModel>, key: string) => {
-      if (currentKey.localeCompare(key) < 0) return
-
-      for (let value of values) {
-        if (value instanceof MiddlewareArgModel && key.indexOf(value.instance) == 0) {
-          middlewares.push(value)
-        }
-      }
-    }) */
 
     return middlewares
   }

@@ -18,19 +18,16 @@ export * from './decorator/socket-query-param.decorator'
 export * from './decorator/socket-request.decorator'
 export * from './decorator/socket-rooms.decorator'
 
-export * from './helper/using.helper'
 export * from './helper/container.helper'
 
 export * from './error/server.error'
 export * from './error/parse-json.socket.error'
 
-export * from './model/socket-executor.model'
-
 export * from './interface/middleware.interface'
 
 import { Server } from 'socket.io'
 
-import { UsingHelper } from './helper/using.helper'
+import { ExecutorHelper } from './helper/executor.helper'
 
 import { SettingInterface } from './interface/setting.interface'
 
@@ -42,7 +39,7 @@ export namespace SocketIoController {
      * Create an executor to the socket server and return them
      */
     export function useSocketIoServer(io: Server, options?: SettingInterface): Server {
-        UsingHelper.createExecutor(io, options || {})
+        ExecutorHelper.createExecutor(io, options || {})
 
         return io
     }

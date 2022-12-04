@@ -7,7 +7,7 @@ import { SettingInterface } from '../interface/setting.interface'
 /**
  * Helper to help use this library
  */
-export class UsingHelper {
+export class ExecutorHelper {
     /**
      * Create an executor to the socket server
      */
