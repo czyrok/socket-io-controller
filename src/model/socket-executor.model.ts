@@ -162,7 +162,7 @@ export class SocketExecutorModel {
       }
 
       for (let value of line[1]) {
-        if (value instanceof MiddlewareArgModel && key.indexOf(value.namespace) == 0) {
+        if (value instanceof MiddlewareArgModel && currentKey.indexOf(value.namespace) == 0) {
           middlewares.push(value)
         }
       }
